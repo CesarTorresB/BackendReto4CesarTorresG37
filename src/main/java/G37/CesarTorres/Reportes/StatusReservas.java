@@ -8,11 +8,12 @@ package G37.CesarTorres.Reportes;
  *
  * @author cesartbossa
  */
-public class StatusReservaciones {
+public class StatusReservas {
+    
     private int completed;
     private int cancelled;
 
-    public StatusReservaciones (int completed, int cancelled) {
+    public StatusReservas(int completed, int cancelled) {
         this.completed = completed;
         this.cancelled = cancelled;
     }

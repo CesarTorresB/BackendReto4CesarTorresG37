@@ -11,7 +11,7 @@ package G37.CesarTorres.Servicios;
 import G37.CesarTorres.Repositorio.RepositorioReservaciones;
 import G37.CesarTorres.Modelo.Reservaciones;
 import G37.CesarTorres.Reportes.ContadorClientes;
-import G37.CesarTorres.Reportes.StatusReservaciones;
+import G37.CesarTorres.Reportes.StatusReservas;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,11 +107,11 @@ public class ServiciosReservaciones {
     /*
     * Llamado a status reservas
     */
-    public StatusReservaciones reporteStatusServicio (){
-        List<Reservaciones>completed= metodosCrud.ReservacionesStatusRepositorio("completed");
-        List<Reservaciones>cancelled= metodosCrud.ReservacionesStatusRepositorio("cancelled");
+    public StatusReservas reporteStatusServicio (){
+        List<Reservaciones>completed= metodosCrud.ReservacionStatusRepositorio("completed");
+        List<Reservaciones>cancelled= metodosCrud.ReservacionStatusRepositorio("cancelled");
         
-        return new StatusReservaciones (completed.size(), cancelled.size() );
+        return new StatusReservas(completed.size(), cancelled.size() );
     }
     /*
     * Tiempo de servicio
@@ -128,7 +128,7 @@ public class ServiciosReservaciones {
         }catch(ParseException evt){
             evt.printStackTrace();
         }if(datoUno.before(datoDos)){
-            return metodosCrud.ReservacionesTiempoRepositorio(datoUno, datoDos);
+            return metodosCrud.ReservacionTiempoRepositorio(datoUno, datoDos);
         }else{
             return new ArrayList<>();
         
@@ -139,5 +139,5 @@ public class ServiciosReservaciones {
     */
     public List<ContadorClientes> reporteClientesServicio(){
             return metodosCrud.getClientesRepositorio();
-        }
+        } 
 }

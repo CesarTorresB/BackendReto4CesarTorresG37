@@ -11,6 +11,7 @@ import G37.CesarTorres.Modelo.Cliente;
  * @author cesartbossa
  */
 public class ContadorClientes {
+   
     private Long total;
     private Cliente client;
 

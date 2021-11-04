@@ -39,11 +39,11 @@ public class RepositorioReservaciones {
     public void delete(Reservaciones reservation){
         crud4.delete(reservation);
     }
-    public List<Reservaciones> ReservacionesStatusRepositorio (String status){
+     public List<Reservaciones> ReservacionStatusRepositorio (String status){
          return crud4.findAllByStatus(status);
     }
      
-     public List<Reservaciones> ReservacionesTiempoRepositorio (Date a, Date b){
+     public List<Reservaciones> ReservacionTiempoRepositorio (Date a, Date b){
          return crud4.findAllByStartDateAfterAndStartDateBefore(a, b);
      
     }

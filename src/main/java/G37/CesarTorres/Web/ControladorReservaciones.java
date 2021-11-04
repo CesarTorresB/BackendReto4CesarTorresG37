@@ -7,7 +7,7 @@ package G37.CesarTorres.Web;
 
 import G37.CesarTorres.Modelo.Reservaciones;
 import G37.CesarTorres.Reportes.ContadorClientes;
-import G37.CesarTorres.Reportes.StatusReservaciones;
+import G37.CesarTorres.Reportes.StatusReservas;
 import G37.CesarTorres.Servicios.ServiciosReservaciones;
 import java.util.List;
 import java.util.Optional;
@@ -62,12 +62,12 @@ public class ControladorReservaciones {
         return servicio.deleteReservation(reservationId);
     }
     @GetMapping("/report-status")
-    public StatusReservaciones getReservaciones(){
+    public StatusReservas getReservas(){
         return servicio.reporteStatusServicio();
     }
     
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
-     public List<Reservaciones> getReservacionesTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+     public List<Reservaciones> getReservasTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
          return servicio.reporteTiempoServicio(dateOne, dateTwo);
      }
      
