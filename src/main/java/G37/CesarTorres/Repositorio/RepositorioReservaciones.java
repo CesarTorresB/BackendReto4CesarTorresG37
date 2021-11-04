@@ -7,7 +7,11 @@ package G37.CesarTorres.Repositorio;
 
 
 import G37.CesarTorres.Interface.InterfaceReservaciones;
+import G37.CesarTorres.Modelo.Cliente;
 import G37.CesarTorres.Modelo.Reservaciones;
+import G37.CesarTorres.Reportes.ContadorClientes;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +39,21 @@ public class RepositorioReservaciones {
     public void delete(Reservaciones reservation){
         crud4.delete(reservation);
     }
-    
+    public List<Reservaciones> ReservacionesStatusRepositorio (String status){
+         return crud4.findAllByStatus(status);
+    }
+     
+     public List<Reservaciones> ReservacionesTiempoRepositorio (Date a, Date b){
+         return crud4.findAllByStartDateAfterAndStartDateBefore(a, b);
+     
+    }
+     
+     public List<ContadorClientes> getClientesRepositorio(){
+         List<ContadorClientes> res = new ArrayList<>();
+         List<Object[]> report = crud4.countTotalReservationsByClient();
+         for(int i=0; i<report.size(); i++){
+             res.add(new ContadorClientes((Long)report.get(i)[1],(Cliente) report.get(i)[0]));
+         }
+         return res;
+    }
 }

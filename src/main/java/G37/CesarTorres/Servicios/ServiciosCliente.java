@@ -7,8 +7,6 @@ package G37.CesarTorres.Servicios;
 
 
 import G37.CesarTorres.Modelo.Cliente;
-import G37.CesarTorres.Modelo.Cliente;
-import G37.CesarTorres.Repositorio.RepositorioCliente;
 import G37.CesarTorres.Repositorio.RepositorioCliente;
 import java.util.List;
 import java.util.Optional;

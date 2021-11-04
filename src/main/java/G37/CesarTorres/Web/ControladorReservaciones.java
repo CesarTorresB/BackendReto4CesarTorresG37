@@ -5,9 +5,9 @@ package G37.CesarTorres.Web;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
 import G37.CesarTorres.Modelo.Reservaciones;
-import G37.CesarTorres.Modelo.Reservaciones;
+import G37.CesarTorres.Reportes.ContadorClientes;
+import G37.CesarTorres.Reportes.StatusReservaciones;
 import G37.CesarTorres.Servicios.ServiciosReservaciones;
 import java.util.List;
 import java.util.Optional;
@@ -61,5 +61,18 @@ public class ControladorReservaciones {
     public boolean delete(@PathVariable("id") int reservationId) {
         return servicio.deleteReservation(reservationId);
     }
+    @GetMapping("/report-status")
+    public StatusReservaciones getReservaciones(){
+        return servicio.reporteStatusServicio();
+    }
     
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+     public List<Reservaciones> getReservacionesTiempo (@PathVariable("dateOne")String dateOne, @PathVariable("dateTwo")String dateTwo ){
+         return servicio.reporteTiempoServicio(dateOne, dateTwo);
+     }
+     
+     @GetMapping("/report-clients")
+     public List<ContadorClientes> getClientes(){
+         return servicio.reporteClientesServicio();
+     }
 }

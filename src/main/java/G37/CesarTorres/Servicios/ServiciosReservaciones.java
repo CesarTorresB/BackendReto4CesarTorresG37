@@ -5,11 +5,17 @@ package G37.CesarTorres.Servicios;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
-import G37.CesarTorres.Repositorio.RepositorioReservaciones;
+/*
+**Importaciones
+**/
 import G37.CesarTorres.Repositorio.RepositorioReservaciones;
 import G37.CesarTorres.Modelo.Reservaciones;
-import G37.CesarTorres.Modelo.Reservaciones;
+import G37.CesarTorres.Reportes.ContadorClientes;
+import G37.CesarTorres.Reportes.StatusReservaciones;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,5 +104,40 @@ public class ServiciosReservaciones {
         }).orElse(false);
         return aBoolean;
     }
-    
+    /*
+    * Llamado a status reservas
+    */
+    public StatusReservaciones reporteStatusServicio (){
+        List<Reservaciones>completed= metodosCrud.ReservacionesStatusRepositorio("completed");
+        List<Reservaciones>cancelled= metodosCrud.ReservacionesStatusRepositorio("cancelled");
+        
+        return new StatusReservaciones (completed.size(), cancelled.size() );
+    }
+    /*
+    * Tiempo de servicio
+    */
+    public List<Reservaciones> reporteTiempoServicio (String datoA, String datoB){
+        SimpleDateFormat parser = new SimpleDateFormat ("yyyy-MM-dd");
+        
+        Date datoUno = new Date();
+        Date datoDos = new Date();
+        
+        try{
+             datoUno = parser.parse(datoA);
+             datoDos = parser.parse(datoB);
+        }catch(ParseException evt){
+            evt.printStackTrace();
+        }if(datoUno.before(datoDos)){
+            return metodosCrud.ReservacionesTiempoRepositorio(datoUno, datoDos);
+        }else{
+            return new ArrayList<>();
+        
+        } 
+    } 
+    /*
+    * Llamado a contador de clientes
+    */
+    public List<ContadorClientes> reporteClientesServicio(){
+            return metodosCrud.getClientesRepositorio();
+        }
 }
